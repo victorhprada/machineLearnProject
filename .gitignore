@@ -22,3 +22,6 @@ env/
 
 # Jupyter Notebook
 .ipynb_checkpoints 
+
+# Images
+*.webp

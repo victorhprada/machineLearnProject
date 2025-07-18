@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import recall_score, precision_score, f1_score, RocCurveDisplay, roc_auc_score, PrecisionRecallDisplay
+from sklearn.metrics import average_precision_score, classification_report
 
 df = pd.read_csv('emp_automovel.csv')
 
@@ -38,4 +41,24 @@ print(confusion_matrix(y_test, y_previsao))
 visualizacao = ConfusionMatrixDisplay(confusion_matrix(y_test, y_previsao), 
                                       display_labels=['Não inadimplente', 'Inadimplente'])
 visualizacao.plot()
+# plt.show()
+
+print(f'Acurácia do modelo: {accuracy_score(y_test, y_previsao)}')
+print(f'Precisão do modelo: {precision_score(y_test, y_previsao)}')
+print(f'Recall do modelo: {recall_score(y_test, y_previsao)}')
+print(f'F1 do modelo: {f1_score(y_test, y_previsao)}')
+
+# Curva ROC
+RocCurveDisplay.from_predictions(y_test, y_previsao, name='Modelo de árvore de decisão')
 plt.show()
+
+print(f'AUC do modelo: {roc_auc_score(y_test, y_previsao)}')
+
+# Curva Precision-Recall
+PrecisionRecallDisplay.from_predictions(y_test, y_previsao, name='Modelo de árvore de decisão')
+plt.show()
+
+print(f'AP do modelo: {average_precision_score(y_test, y_previsao)}')
+
+print(classification_report(y_test, y_previsao))
+
